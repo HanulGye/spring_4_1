@@ -4,6 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberMapper">
-	<insert id="insert"></insert>
-
+	<insert id="join" parameterType="MemberDTO">
+		INSERT INTO member VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{address}, 1)
+	</insert>
+	
+	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT * FROM member WHERE id=#{id} and pw=#{pw}
+	</select>
+	<select id="checkId" parameterType="string" resultType="MemberDTO">
+		SELECT * FROM member WHERE id=#{id}
+	</select>	
+	<update id="update" parameterType="MemberDTO">
+		UPDATE member SET pw=#{pw}, name=#{name}, email=#{email}, phone=#{phone}, address=#{address} WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		DELETE member WHERE id=#{id}
+	</delete>
+	
+	
 </mapper>  

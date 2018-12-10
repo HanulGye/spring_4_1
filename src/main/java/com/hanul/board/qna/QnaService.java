@@ -47,8 +47,15 @@ public class QnaService implements BoardService {
 		return qnaDAO.list(pager);
 	}
 
-	public int reply(QnaDTO qnaDTO, Integer num) throws Exception{
-		QnaDTO qnaDTO2 = (QnaDTO)qnaDAO.select(num);
+	public int reply(QnaDTO qnaDTO) throws Exception{
+		QnaDTO parentQnaDTO = (QnaDTO)qnaDAO.select(qnaDTO.getNum());
+		
+		qnaDAO.replyUpdate(parentQnaDTO);
+		
+		qnaDTO.setRef(parentQnaDTO.getRef());
+		qnaDTO.setStep(parentQnaDTO.getStep()+1);
+		qnaDTO.setDepth(parentQnaDTO.getDepth()+1);
+		
 		
 		return qnaDAO.reply(qnaDTO);
 	}

@@ -13,6 +13,8 @@
 		if(message!=''){
 			alert(message);
 		}
+		
+		
 	})
 
 </script>
@@ -20,7 +22,7 @@
 </head>
 <body>
 	<h2>${board} List</h2>
-	
+	<h3>${sessionMember.id}</h3>
 	
 	<table>
 		<tr>

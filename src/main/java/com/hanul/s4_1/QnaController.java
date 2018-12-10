@@ -37,6 +37,18 @@ public class QnaController {
 		return "board/boardSelect";
 	}
 	
+	@RequestMapping(value="qnaWrite", method=RequestMethod.GET)
+	public String writeForm(Model model) throws Exception{
+		model.addAttribute("board", "qna");
+		return "board/boardWrite";
+	}
+	
+	@RequestMapping(value="qnaWrite", method=RequestMethod.POST)
+	public String wrtie(QnaDTO qnaDTO) throws Exception{
+		int result = qnaService.insert(qnaDTO);
+		return "redirect:./qnaList";
+	}
+	
 	@RequestMapping(value="reply")
 	public String replyForm(Model model, Integer num) throws Exception{
 		model.addAttribute("board", "QnaReply");
@@ -46,8 +58,7 @@ public class QnaController {
 	
 	@RequestMapping(value="QnaReplyWrite", method=RequestMethod.POST)
 	public String reply(QnaDTO qnaDTO) throws Exception{
-		
-		qnaService.reply(qnaDTO, qnaDTO.getRef());
+		int result = qnaService.reply(qnaDTO);
 		return "redirect:./qnaList";
 	}
 }

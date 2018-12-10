@@ -28,6 +28,11 @@
 				<th>contents</th>
 				<td><textarea style="width: 500px; height: 500px" name="contents"></textarea></td>
 			</tr>
+			<c:if test="${board eq 'QnaReply'}">
+				<tr>
+					<td><input type="hidden" name="num" value="${refContents}"></td>
+				</tr>
+			</c:if>
 		</table>
 		<button>Write</button>
 	</form>

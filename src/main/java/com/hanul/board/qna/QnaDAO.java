@@ -44,14 +44,17 @@ public class QnaDAO implements BoardDAO {
 		return sqlsession.delete(nameSpace+"delete", num);
 	}
 	
-	public int reply(QnaDTO qnaDTO) throws Exception{
-		return sqlsession.insert(nameSpace+"reply", qnaDTO);
-	}
-
 	@Override
 	public int getCount(Pager pager) throws Exception {
 		
 		return sqlsession.selectOne(nameSpace+"getCount", pager);
 	}
 	
+	public int reply(QnaDTO qnaDTO) throws Exception{
+		return sqlsession.insert(nameSpace+"reply", qnaDTO);
+	}
+	
+	public int replyUpdate(QnaDTO qnaDTO) throws Exception{
+		return sqlsession.update(nameSpace+"replyUpdate", qnaDTO);
+	}
 }

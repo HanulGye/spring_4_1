@@ -19,7 +19,7 @@
 				title
 			</otherwise>
 		</choose>
-		like '%'||#{search}||'%' order by num desc) Q)
+		like '%'||#{search}||'%' order by ref desc, step asc) Q)
 		where R between #{startRow} and #{lastRow}
   	</select>
   	<select id="select" parameterType="integer" resultType="QnaDTO">
@@ -42,6 +42,9 @@
 	</select>
   	<update id="update" parameterType="QnaDTO">
   		UPDATE qna SET title = #{title}, contents = #{contents} WHERE num= #{num}
+  	</update>
+  	<update id="replyUpdate" parameterType="QnaDTO">
+  		update qna set step=step+1 where ref=#{ref} and step>#{step}
   	</update>
 	<delete id="delete" parameterType="integer">
 		DELETE qna WHERE num = #{num}
