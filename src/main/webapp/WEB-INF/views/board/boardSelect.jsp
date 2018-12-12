@@ -24,7 +24,21 @@
 	<h3>Writer : ${dto.writer}</h3>
 	<h3>Contents : ${dto.contents}</h3>
 	<h3>Date : ${dto.reg_date}</h3>
-	<h4>ref : ${dto.ref}</h4>
+	<c:if test="${board eq 'qna'}">
+		<h4>ref : ${dto.ref}</h4>
+	
+	</c:if>
+	
+	<div>
+		<c:forEach items="${files}" var="file" varStatus="i">
+			<div id="f${i.index}">
+				<a href="../resources/${board}/${file.fname}">${file.oname}</a>
+			</div>
+		
+		</c:forEach>
+	
+	</div>
+	
 	
 	<form action="./${board}Delete" method="POST">
 		<input type="hidden" value="${dto.num}" name="num">

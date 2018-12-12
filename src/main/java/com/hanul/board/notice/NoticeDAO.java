@@ -48,5 +48,9 @@ public class NoticeDAO implements BoardDAO {
 	public int getCount(Pager pager) throws Exception {
 		return sqlSession.selectOne(nameSpace+"getCount", pager);
 	}
+	
+	public int getNum() throws Exception{
+		return sqlSession.selectOne(nameSpace+"getNum");
+	}
 
 }

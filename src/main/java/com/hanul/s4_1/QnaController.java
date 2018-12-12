@@ -17,7 +17,7 @@ import com.hanul.util.Pager;
 @Controller
 @RequestMapping(value="/qna/**")
 public class QnaController {
-	@Inject
+	/*@Inject
 	private QnaService qnaService;
 	
 	@RequestMapping(value="qnaList")
@@ -60,5 +60,5 @@ public class QnaController {
 	public String reply(QnaDTO qnaDTO) throws Exception{
 		int result = qnaService.reply(qnaDTO);
 		return "redirect:./qnaList";
-	}
+	}*/
 }

@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import com.hanul.board.BoardDTO;
 import com.hanul.board.BoardService;
 import com.hanul.util.Pager;
-@Service
-public class QnaService implements BoardService {
-	
+//@Service
+public class QnaService //implements BoardService 
+{
+	/*
 	@Inject
 	QnaDAO qnaDAO = new QnaDAO();
 	
@@ -59,4 +60,4 @@ public class QnaService implements BoardService {
 		
 		return qnaDAO.reply(qnaDTO);
 	}
-}
+*/}

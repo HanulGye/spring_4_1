@@ -3,11 +3,14 @@ package com.hanul.s4_1;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hanul.board.BoardDTO;
@@ -36,11 +39,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeSelect", method=RequestMethod.GET)
-	public String select(Model model, Integer num) throws Exception {
-		BoardDTO boardDTO = noticeService.select(num);
-		model.addAttribute("board", "notice");
-		model.addAttribute("dto", boardDTO);
-		return "board/boardSelect";
+	public ModelAndView select(Integer num) throws Exception {
+		ModelAndView modelAndView = noticeService.select(num);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value="noticeWrite", method=RequestMethod.GET)
@@ -50,35 +51,22 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeWrite", method=RequestMethod.POST)
-	public String write(BoardDTO boardDTO, RedirectAttributes rd) throws Exception{
-		int result = noticeService.insert(boardDTO);
-		String message ="Fail";
-		
-		if(result<1) {
-			rd.addFlashAttribute("msg", message); 
-		}
-		return "redirect:./noticeList";
+	public ModelAndView write(BoardDTO boardDTO, List<MultipartFile> f1, HttpSession session) throws Exception{
+		ModelAndView modelAndView = noticeService.insert(boardDTO, f1, session);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value="noticeUpdate", method=RequestMethod.GET)
-	public String update(Model model, Integer num) throws Exception{
-		BoardDTO boardDTO =  noticeService.select(num);
-		model.addAttribute("board", "notice");
-		model.addAttribute("dto", boardDTO);
-		return "board/boardUpdate";
+	public ModelAndView update(Integer num) throws Exception{
+		ModelAndView modelAndView =  noticeService.select(num);
+		modelAndView.setViewName("board/boardUpdate");
+		return modelAndView;
 	}
 	
 	@RequestMapping(value="noticeUpdate", method=RequestMethod.POST)
-	public String update(BoardDTO boardDTO, RedirectAttributes rd) throws Exception{
-		int result = noticeService.update(boardDTO);
-		String message ="update Fail";
-		if(result<1) {
-			rd.addFlashAttribute("msg", message);
-		}else {
-			message = "update success";
-			rd.addFlashAttribute("msg", message);
-		}
-		return "redirect:./noticeList";
+	public ModelAndView update(BoardDTO boardDTO, List<MultipartFile> f1, HttpSession session) throws Exception{
+		ModelAndView modelAndView = noticeService.update(boardDTO, f1, session);
+		return modelAndView;
 	}
 	
 	@RequestMapping(value="noticeDelete", method=RequestMethod.POST)

@@ -10,7 +10,7 @@
 <body>
 	<h2>${board} Write Page</h2>
 	
-	<form action="./${board}Write" method="post">
+	<form action="./${board}Write" method="post" enctype="multipart/form-data">
 		<table style="width: 1000px">
 			<colgroup>
 				<col width="80%">
@@ -28,6 +28,18 @@
 				<th>contents</th>
 				<td><textarea style="width: 500px; height: 500px" name="contents"></textarea></td>
 			</tr>
+			<tr>
+				<td>
+					<input type="button" value="ADD">
+					<div id="files">
+						<div>
+							<input type="file" name="f1"><span>X</span>
+							<input type="file" name="f1"><span>X</span>
+						</div>
+					</div>
+				</td>
+			</tr>
+			
 			<c:if test="${board eq 'QnaReply'}">
 				<tr>
 					<td><input type="hidden" name="num" value="${refContents}"></td>
